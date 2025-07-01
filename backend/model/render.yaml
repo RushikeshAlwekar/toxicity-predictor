@@ -2,8 +2,9 @@ services:
   - type: web
     name: toxicity-backend
     env: python
+    rootDir: backend # 🟢 Tell Render to run from backend/ folder
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "python backend/app.py"
+    startCommand: "python app.py"
     plan: free
     envVars:
       - key: PORT
