@@ -1,0 +1,18 @@
+toxicity-predictor/
+│
+├── backend/
+│   ├── model/
+│   │   ├── train_model.py          # Script to train the model
+│   │   ├── toxicity_model.pkl      # Saved model
+│   │   └── preprocessing.py        # Preprocessing functions
+│   └── app.py                      # Flask or FastAPI backend
+│
+├── frontend/
+│   ├── index.html                  # Simple UI
+│   ├── style.css                   # Optional styling
+│   └── script.js                   # Handles API calls
+│
+├── data/
+│   └── train.csv                   # Jigsaw dataset or sample data
+│
+└── requirements.txt                # All dependencies
