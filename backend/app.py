@@ -4,10 +4,6 @@ import joblib
 from model.preprocessing import clean_text
 import os
 
-port = int(os.environ.get("PORT", 10000))
-
-app.run(host="0.0.0.0", port=port)
-
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
@@ -29,13 +25,13 @@ def predict():
 
     result = {}
     for i, label in enumerate(labels):
-        # Get probability of label being 1 (toxic)
         result[label] = round(probabilities[i][0][1] * 100, 2)
 
-    # Determine if it's safe (no label above 50%)
     result['safe'] = all(p < 50 for label, p in result.items())
 
     return jsonify(result)
 
+# Only use this locally — Render uses gunicorn to start your app
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port, debug=True)
