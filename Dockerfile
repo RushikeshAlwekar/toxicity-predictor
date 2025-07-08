@@ -1,18 +1,18 @@
-# Use Python 3.10 base image
+# Use official Python image with version 3.10
 FROM python:3.10-slim
 
-# Set working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy files
+# Copy everything into the container
 COPY . .
 
 # Install dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Expose port (should match your app)
+# Expose the port your app runs on
 EXPOSE 10000
 
-# Command to run your app
+# Run the app
 CMD ["python", "app.py"]
