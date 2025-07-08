@@ -12,18 +12,18 @@ labels = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate
 
 @app.route('/')
 def home():
-    return "Toxicity Predictor Backend Running"
+    return "✅ Toxicity Predictor Backend is running."
 
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
     comment = data.get('text', '')
     cleaned = clean_text(comment)
-    probabilities = model.predict_proba([cleaned])
-
+    
+    probas = model.predict_proba([cleaned])  # returns list of (n_labels) arrays
     result = {}
     for i, label in enumerate(labels):
-        result[label] = round(probabilities[i][0][1] * 100, 2)
+        result[label] = round(probas[i][0][1] * 100, 2)
 
     result['safe'] = all(p < 50 for label, p in result.items())
     return jsonify(result)
