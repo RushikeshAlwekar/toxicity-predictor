@@ -1,25 +1,18 @@
 # Use Python 3.10 base image
 FROM python:3.10-slim
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies (for numpy, scikit-learn, nltk etc.)
-RUN apt-get update && apt-get install -y gcc
-
-# Copy project files
+# Copy files
 COPY . .
 
-# Install Python dependencies
+# Install dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Expose port (if needed for Render, usually 10000 or 5000)
+# Expose port (should match your app)
 EXPOSE 10000
 
-# Start your app
+# Command to run your app
 CMD ["python", "app.py"]
