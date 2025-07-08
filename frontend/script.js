@@ -10,13 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
     output.innerHTML = "";
     loader.classList.remove("hidden");
 
-    const response = await fetch("http://127.0.0.1:10000/predict", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ text: input }),
-    });
+    const response = await fetch(
+      "https://toxicity-predictor-5.onrender.com/predict",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: input }),
+      }
+    );
 
     const result = await response.json();
     loader.classList.add("hidden");
